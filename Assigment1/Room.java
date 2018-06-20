@@ -8,7 +8,7 @@ Class Room
 	      class (first second third)
 */
 package Assignment1;
-
+import Room;
 public class Room
 {
 	float cost;
