@@ -1,0 +1,4 @@
+class temp extends Room{
+
+    
+}

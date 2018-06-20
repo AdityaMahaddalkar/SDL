@@ -4,7 +4,7 @@ Class: Hotel
 Data structure used: Array of rooms
  		     ArrayDeque for club
  */
-
+package Assignment1;
 import java.util.*;
 
 public class Hotel extends Room{

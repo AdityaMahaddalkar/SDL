@@ -3,11 +3,11 @@
 Class Room
 
 	data: cost of room
-	      room nos 
+	      room nos
 	      floor no
 	      class (first second third)
 */
-
+package Assignment1;
 
 public class Room
 {
@@ -25,9 +25,7 @@ public class Room
 		suite="NA";
 		floorNo=0;
 		occupied=false;
-		
-		
-		
+
 	}
 	public Room(int cost,String roomNo,String suite,int floorNo,boolean occupied)
 	{
@@ -46,16 +44,14 @@ public class Room
 		if(occupied)
 		{
 			System.out.println(" Room is occupied ");
-			
+
 		}
 		else
 		{
 			System.out.println(" Room service done!");
 		}
 	}
-	
-	
-	
+
+
+
 }
-
-
