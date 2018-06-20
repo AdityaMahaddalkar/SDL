@@ -45,7 +45,7 @@ public class Hotel extends Room{
 				arrayOfRooms.add(new Room(scan.nextInt(), scan.next(), scan.next(), scan.nextInt(), false));
 
 			}
-			Iterator it<Room> = arrayOfRooms.iterator();
+			Iterator it = arrayOfRooms.iterator();
 			while(it.hasNext()){
 				if(it.next().suite == "I"){
 					suiteArr[0] ++;
@@ -88,7 +88,7 @@ public class Hotel extends Room{
 			}
 		}
 		if(chances > 0){
-			Iterator it<Room> = arrayOfRooms.iterator();
+			Iterator it = arrayOfRooms.iterator();
 			while(it.hasNext()){
 				if(it.next().isOccupied() == false && it.next().suite == suiteIn){
 					it.next().occupied = true;
