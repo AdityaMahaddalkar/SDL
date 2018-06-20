@@ -97,7 +97,7 @@ public class Hotel extends Room{
 			}
 		}
 		else{
-			print("Room not available")
+			print("Room not available");
 			return false;
 		}
 
