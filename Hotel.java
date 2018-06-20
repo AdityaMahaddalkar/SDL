@@ -1,4 +1,4 @@
-/* Class Descr: 
+/* Class Descr:
 
 Class: Hotel
 Data structure used: Array of rooms
@@ -13,17 +13,17 @@ public class Hotel extends Room{
 	private String adminPass;
 	String hotelName;
 	int [] suiteArr;
-	
+
 	public Hotel(){
 		arrayOfRooms = new ArrayList<Room>();
 		clubDeque = new ArrayDeque<Room>();
 		adminPass = "123456";
 		suiteArr = new int[3];
 		for(int i = 0;i < 3;i ++){
-			suiteArr[i] = 0;	
+			suiteArr[i] = 0;
 		}
 	}
-	
+
 	public Hotel(String name){
 		arrayOfRooms = new ArrayList<Room>();
 		clubDeque = new ArrayDeque<Room>();
@@ -31,19 +31,19 @@ public class Hotel extends Room{
 		hotelName = name;
 		suiteArr = new int[3];
 		for(int i = 0;i < 3;i ++){
-			suiteArr[i] = 0;	
+			suiteArr[i] = 0;
 		}
 	}
 
 	public static void print(Object s) { System.out.println(s); }
-	
+
 	protected void addRooms(String password, int noOfRooms){
 		Scanner scan = new Scanner(System.in);
 		if(password == adminPass){
 			for(int i = 0;i < noOfRooms;i ++){
 				print("Enter cost, rn, suite, floor: ");
 				arrayOfRooms.add(new Room(scan.nextInt(), scan.next(), scan.next(), scan.nextInt(), false));
-				
+
 			}
 			Iterator it<Room> = arrayOfRooms.iterator();
 			while(it.hasNext()){
@@ -62,7 +62,7 @@ public class Hotel extends Room{
 			print("Wrong password");
 		}
 	}
-	
+
 	protected boolean bookRoom(){
 		int chances = 5;
 		String suiteIn;
@@ -85,14 +85,14 @@ public class Hotel extends Room{
 			}
 			else{
 				print("Suite not available! Select another one");
-			} 
+			}
 		}
 		if(chances > 0){
 			Iterator it<Room> = arrayOfRooms.iterator();
 			while(it.hasNext()){
 				if(it.next().isOccupied() == false && it.next().suite == suiteIn){
-					
-				
+					it.next().occupied = true;
+					// add code here to book the room by far as programmer's view
 				}
 			}
 		}
@@ -100,7 +100,7 @@ public class Hotel extends Room{
 			print("Room not available")
 			return false;
 		}
-		
+
 	}
-	
+
 }
