@@ -69,7 +69,7 @@ class Hotel extends Room{
 		}
 	}
 
-	protected boolean bookRoom(){
+	protected boolean checkin(){
 		int chances = 5;
 		String suiteIn;
 		Scanner sc = new Scanner(System.in);
