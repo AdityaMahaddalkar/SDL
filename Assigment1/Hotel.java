@@ -3,11 +3,12 @@
 Class: Hotel
 Data structure used: Array of rooms
  		     ArrayDeque for club
+			 Map for previous customers
  */
-package Assignment1;
+package Assigment1;
 import java.util.*;
 
-public class Hotel extends Room{
+class Hotel extends Room{
 	protected ArrayList<Room> arrayOfRooms;
 	protected ArrayDeque<Room> clubDeque;
 	private String adminPass;
@@ -47,13 +48,14 @@ public class Hotel extends Room{
 			}
 			Iterator it = arrayOfRooms.iterator();
 			while(it.hasNext()){
-				if(it.next().suite == "I"){
+				Object iter = it.next();
+				if(iter.suite == "I"){
 					suiteArr[0] ++;
 				}
-				if(it.next().suite == "II"){
+				if(iter.suite == "II"){
 					suiteArr[1] ++;
 				}
-				if(it.next().suite == "III"){
+				if(iter.suite == "III"){
 					suiteArr[2] ++;
 				}
 			}
@@ -90,8 +92,9 @@ public class Hotel extends Room{
 		if(chances > 0){
 			Iterator it = arrayOfRooms.iterator();
 			while(it.hasNext()){
-				if(it.next().isOccupied() == false && it.next().suite == suiteIn){
-					it.next().occupied = true;
+				Object iter = it.next();
+				if(iter.isOccupied() == false && iter.suite == suiteIn){
+					iter.occupied = true;
 					// add code here to book the room by far as programmer's view
 				}
 			}

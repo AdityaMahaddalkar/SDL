@@ -7,16 +7,16 @@ Class Room
 	      floor no
 	      class (first second third)
 */
-package Assignment1;
-import Room;
-public class Room
+package Assigment1;
+
+class Room
 {
 	float cost;
 	String roomNo;
 	String suite;
 	int floorNo;
 	boolean occupied;
-
+	String occupant;
 
 	public Room()
 	{
@@ -25,6 +25,7 @@ public class Room
 		suite="NA";
 		floorNo=0;
 		occupied=false;
+		occupant = "NA";
 
 	}
 	public Room(int cost,String roomNo,String suite,int floorNo,boolean occupied)
@@ -38,6 +39,9 @@ public class Room
 	boolean isOccupied()
 	{
 		return occupied;
+	}
+	boolean addOccupant(String name){
+		this.occupant = name;
 	}
 	void roomService()
 	{
