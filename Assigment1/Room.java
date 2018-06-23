@@ -7,16 +7,15 @@ Class Room
 	      floor no
 	      class (first second third)
 */
-package Assigment1;
 
-class Room
+public class Room
 {
-	float cost;
-	String roomNo;
-	String suite;
-	int floorNo;
-	boolean occupied;
-	String occupant;
+	protected float cost;
+	protected String roomNo;
+	protected String suite;
+	protected int floorNo;
+	protected boolean occupied;
+	protected String occupant;
 
 	public Room()
 	{
@@ -41,7 +40,25 @@ class Room
 		return occupied;
 	}
 	boolean addOccupant(String name){
-		this.occupant = name;
+		try{
+			this.occupant = name;
+			this.occupied = true;
+		}
+		catch(Exception e){
+			//print(String(e));
+			return false;
+		}
+		return true;
+	}
+	boolean deleteOccupant(){
+		try{
+			this.occupant = "NA";
+			this.occupied = false;
+		}
+		catch(Exception e){
+			return false;
+		}
+		return true;
 	}
 	void roomService()
 	{
