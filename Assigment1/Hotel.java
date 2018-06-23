@@ -5,8 +5,10 @@ Data structure used: Array of rooms
  		     ArrayDeque for club
 			 Map for previous customers
  */
-package Assigment1;
+
 import java.util.*;
+
+
 
 class Hotel extends Room{
 	protected ArrayList<Room> arrayOfRooms;
@@ -40,24 +42,26 @@ class Hotel extends Room{
 
 	protected void addRooms(String password, int noOfRooms){
 		Scanner scan = new Scanner(System.in);
-		if(password == adminPass){
+		if(password.equals(adminPass)){
 			for(int i = 0;i < noOfRooms;i ++){
 				print("Enter cost, rn, suite, floor: ");
 				arrayOfRooms.add(new Room(scan.nextInt(), scan.next(), scan.next(), scan.nextInt(), false));
 
 			}
-			Iterator it = arrayOfRooms.iterator();
-			while(it.hasNext()){
-				Object iter = it.next();
-				if(iter.suite == "I"){
-					suiteArr[0] ++;
+			
+			int i = 0;
+			while(i != arrayOfRooms.size()){
+				
+				if(arrayOfRooms.get(i).suite.equals("I")){
+					suiteArr[0] += 1;
 				}
-				if(iter.suite == "II"){
-					suiteArr[1] ++;
+				else if(arrayOfRooms.get(i).suite.equals("II")){
+					suiteArr[1] += 1;
 				}
-				if(iter.suite == "III"){
-					suiteArr[2] ++;
+				else if(arrayOfRooms.get(i).suite.equals("III")){
+					suiteArr[0] += 1;
 				}
+				i += 1;
 			}
 		}
 		else{
@@ -69,41 +73,64 @@ class Hotel extends Room{
 		int chances = 5;
 		String suiteIn;
 		Scanner sc = new Scanner(System.in);
+		print("Enter the suite(I, II, III): ");
+		suiteIn = sc.next();
 		while(chances != 0){
 			chances -= 1;
-			print("Enter the suite(I, II, III): ");
-			suiteIn = sc.next();
-			if(suiteIn == "I" && suiteArr[0] != 0){
+			if(suiteIn.equals("I") && suiteArr[0] != 0){
 				suiteArr[0] -= 1;
 				break;
 			}
-			else if(suiteIn == "II" && suiteArr[1] != 0){
+			else if(suiteIn.equals("II") && suiteArr[1] != 0){
 				suiteArr[1] -= 1;
 				break;
 			}
-			else if(suiteIn == "III" && suiteArr[2] != 0){
+			else if(suiteIn.equals("III") && suiteArr[2] != 0){
 				suiteArr[2] -= 1;
 				break;
 			}
 			else{
 				print("Suite not available! Select another one");
+				print("Enter the suite(I, II, III): ");
+				suiteIn = sc.next();
 			}
 		}
 		if(chances > 0){
-			Iterator it = arrayOfRooms.iterator();
-			while(it.hasNext()){
-				Object iter = it.next();
-				if(iter.isOccupied() == false && iter.suite == suiteIn){
-					iter.occupied = true;
-					// add code here to book the room by far as programmer's view
+			
+			int i = 0;
+			while(i != arrayOfRooms.size()){
+				i -= 1;
+				if(!arrayOfRooms.get(i).isOccupied() && arrayOfRooms.get(i).suite.equals(suiteIn)){
+					System.out.println("Enter the occupant name:");
+					arrayOfRooms.get(i).addOccupant(sc.next());
+					break;
 				}
 			}
+			System.out.println("Success!");
+			return true;
 		}
 		else{
 			print("Room not available");
 			return false;
 		}
 
+	}
+
+	protected boolean checkout(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the name of the occupant: ");
+		String name = sc.next();
+		int i = 0;
+		while(i != arrayOfRooms.size() &&  !arrayOfRooms.get(i).occupant.equals(name)){
+			i += 1;
+		}
+		if(arrayOfRooms.get(i).occupant.equals(name)){
+			if(arrayOfRooms.get(i).deleteOccupant()){
+				return true;
+			}
+			return false;
+		}
+		return false;
 	}
 
 }
