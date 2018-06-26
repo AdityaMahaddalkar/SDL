@@ -11,10 +11,10 @@ import java.util.*;
 
 
 class Hotel{
-	protected ArrayList<Room> arrayOfRooms;
-	protected ArrayDeque<String> clubDeque;
-	private String adminPass;
-	private HashSet<String> customerSet;
+	ArrayList<Room> arrayOfRooms;
+	ArrayDeque<String> clubDeque;
+	String adminPass;
+	HashSet<String> customerSet;
 	String hotelName;
 	int [] suiteArr;
 
@@ -41,7 +41,7 @@ class Hotel{
 
 	public static void print(Object s) { System.out.println(s); }
 
-	protected void addRooms(String password, int noOfRooms){
+	void addRooms(String password, int noOfRooms){
 		Scanner scan = new Scanner(System.in);
 		if(password.equals(adminPass)){
 			for(int i = 0;i < noOfRooms;i ++){
@@ -60,7 +60,7 @@ class Hotel{
 					suiteArr[1] += 1;
 				}
 				else if(arrayOfRooms.get(i).suite.equals("III")){
-					suiteArr[0] += 1;
+					suiteArr[2] += 1;
 				}
 				i += 1;
 			}
@@ -70,7 +70,7 @@ class Hotel{
 		}
 	}
 
-	protected boolean checkin(){
+	boolean checkin(){
 		int chances = 5;
 		String suiteIn;
 		Scanner sc = new Scanner(System.in);
@@ -119,7 +119,7 @@ class Hotel{
 
 	}
 
-	protected boolean checkout(){
+	boolean checkout(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter the name of the occupant: ");
 		String name = sc.next();
