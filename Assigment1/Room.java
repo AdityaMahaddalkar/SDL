@@ -8,6 +8,7 @@ Class Room
 	      class (first second third)
 */
 
+package Assigment1;
 public class Room
 {
 	protected float cost;
