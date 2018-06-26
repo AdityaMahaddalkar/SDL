@@ -5,21 +5,22 @@ Data structure used: Array of rooms
  		     ArrayDeque for club
 			 Map for previous customers
  */
-
+package Assigment1;
 import java.util.*;
 
 
 
-class Hotel extends Room{
+class Hotel{
 	protected ArrayList<Room> arrayOfRooms;
-	protected ArrayDeque<Room> clubDeque;
+	protected ArrayDeque<String> clubDeque;
 	private String adminPass;
+	private HashSet<String> customerSet;
 	String hotelName;
 	int [] suiteArr;
 
 	public Hotel(){
 		arrayOfRooms = new ArrayList<Room>();
-		clubDeque = new ArrayDeque<Room>();
+		clubDeque = new ArrayDeque<String>();
 		adminPass = "123456";
 		suiteArr = new int[3];
 		for(int i = 0;i < 3;i ++){
@@ -29,7 +30,7 @@ class Hotel extends Room{
 
 	public Hotel(String name){
 		arrayOfRooms = new ArrayList<Room>();
-		clubDeque = new ArrayDeque<Room>();
+		clubDeque = new ArrayDeque<String>();
 		adminPass = "123456";
 		hotelName = name;
 		suiteArr = new int[3];
@@ -102,7 +103,9 @@ class Hotel extends Room{
 				i -= 1;
 				if(!arrayOfRooms.get(i).isOccupied() && arrayOfRooms.get(i).suite.equals(suiteIn)){
 					System.out.println("Enter the occupant name:");
-					arrayOfRooms.get(i).addOccupant(sc.next());
+					String name = sc.next();
+					customerSet.add(name);
+					arrayOfRooms.get(i).addOccupant(name);
 					break;
 				}
 			}
@@ -133,4 +136,22 @@ class Hotel extends Room{
 		return false;
 	}
 
+	void bookClub(){
+		System.out.println("Enter the room number");
+		Scanner sc = new Scanner(System.in);
+		try{
+			String r_no = sc.next();
+			if(clubDeque.contains(r_no)){
+				throw new Exception("Already in the queue");
+			}
+			clubDeque.add(r_no);
+		}
+		catch(Exception e){
+			print(e);
+		}
+	}
+
+	void exitClub(){
+		System.out.println("Exited Room: " + clubDeque.getLast());
+	}
 }
