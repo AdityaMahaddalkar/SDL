@@ -21,6 +21,7 @@ class Hotel{
 	public Hotel(){
 		arrayOfRooms = new ArrayList<Room>();
 		clubDeque = new ArrayDeque<String>();
+		customerSet = new HashSet<String>();
 		adminPass = "123456";
 		suiteArr = new int[3];
 		for(int i = 0;i < 3;i ++){
@@ -31,6 +32,7 @@ class Hotel{
 	public Hotel(String name){
 		arrayOfRooms = new ArrayList<Room>();
 		clubDeque = new ArrayDeque<String>();
+		customerSet = new HashSet<String>();
 		adminPass = "123456";
 		hotelName = name;
 		suiteArr = new int[3];
@@ -100,7 +102,7 @@ class Hotel{
 			
 			int i = 0;
 			while(i != arrayOfRooms.size()){
-				i -= 1;
+				
 				if(!arrayOfRooms.get(i).isOccupied() && arrayOfRooms.get(i).suite.equals(suiteIn)){
 					System.out.println("Enter the occupant name:");
 					String name = sc.next();
@@ -108,6 +110,7 @@ class Hotel{
 					arrayOfRooms.get(i).addOccupant(name);
 					break;
 				}
+				i += 1;
 			}
 			System.out.println("Success!");
 			return true;
@@ -127,11 +130,17 @@ class Hotel{
 		while(i != arrayOfRooms.size() &&  !arrayOfRooms.get(i).occupant.equals(name)){
 			i += 1;
 		}
+		try{
 		if(arrayOfRooms.get(i).occupant.equals(name)){
 			if(arrayOfRooms.get(i).deleteOccupant()){
 				return true;
 			}
 			return false;
+		}
+		}
+		catch(Exception e){
+			System.out.println("Occupant not found");
+			
 		}
 		return false;
 	}
@@ -145,13 +154,15 @@ class Hotel{
 				throw new Exception("Already in the queue");
 			}
 			clubDeque.add(r_no);
+			System.out.println("Booked");
 		}
 		catch(Exception e){
-			print(e);
+			print(e.getMessage());
 		}
 	}
 
 	void exitClub(){
 		System.out.println("Exited Room: " + clubDeque.getLast());
+		clubDeque.remove();
 	}
 }
