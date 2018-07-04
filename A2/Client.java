@@ -31,12 +31,19 @@ public class Client {
 		try{
 			while(!msg.equalsIgnoreCase("bye") && !msg2.equalsIgnoreCase("bye")){
 				//Send a message
+				if(msg2.equalsIgnoreCase("bye")){
+					System.out.println("Disconnected");
+					break;
+				}
 				System.out.println("Your message: ");
 				msg=systemScanner.nextLine();
 				socketWriter.println(name + " : " + msg);
+				if(msg.equalsIgnoreCase("bye")){
+					break;
+				}
 				socketWriter.flush();
 				msg2 = socketScanner.nextLine();
-				if(msg2.equalsIgnoreCase("bye") || msg.equalsIgnoreCase("bye")){
+				if(msg2.equalsIgnoreCase("bye")){
 					break;
 				}
 				System.out.println(msg2);
