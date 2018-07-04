@@ -39,7 +39,6 @@ public class Server {
 			{
 				while(!msg2.equalsIgnoreCase("bye") && !msg.equalsIgnoreCase("bye"))
 				{
-				
 						msg = socketIn.nextLine();
 						if(msg2.equalsIgnoreCase("bye") || msg.equalsIgnoreCase("bye")){
 							break;
@@ -48,6 +47,9 @@ public class Server {
 						System.out.println("Your message: ");
 						msg2 = sysIn.nextLine();
 						printcom.println("Server : " + msg2);
+						if(msg2.equalsIgnoreCase("bye")){
+							break;
+						}
 						printcom.flush();
 				}
 			}
