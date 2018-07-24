@@ -40,6 +40,13 @@ public class Server extends Thread{
 	{
 		System.out.println(o);
 	}
+	@Override
+	public void run() {
+		while(true)
+		{
+			
+		}
+	}
 }
 class ClientHandler extends Thread
 {

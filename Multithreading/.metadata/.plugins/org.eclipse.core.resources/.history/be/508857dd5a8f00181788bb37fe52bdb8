@@ -22,23 +22,33 @@ public class Server extends Thread{
 	}
 	public static void main(String[] args) throws Exception {
 		Server serv=new Server(5051);
-		
-		while(true) {
-			Socket sock = serv.ServerSock.accept();
-			
-			ClientHandler handle = new ClientHandler(sock);
-			
-			serv.Clients.add(handle);
-			
-			Thread t = new Thread(handle);
-			
-			t.start();
-		}
+		Thread main_thread = new Thread(serv);
+		main_thread.start();
 		
 	}
 	public void print(Object o)
 	{
 		System.out.println(o);
+	}
+	@Override
+	public void run() {
+		while(true)
+		{
+			try {
+				Socket sock = ServerSock.accept();
+				
+				ClientHandler handle = new ClientHandler(sock);
+				
+				Clients.add(handle);
+				
+				Thread t = new Thread(handle);
+				
+				t.start();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
 class ClientHandler extends Thread

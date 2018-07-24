@@ -22,8 +22,18 @@ public class Server extends Thread{
 	}
 	public static void main(String[] args) throws Exception {
 		Server serv=new Server(5051);
+		Thread main_thread = new Thread(serv);
+		main_thread.start();
 		
-		while(true) {
+	}
+	public void print(Object o)
+	{
+		System.out.println(o);
+	}
+	@Override
+	public void run() {
+		while(true)
+		{
 			Socket sock = serv.ServerSock.accept();
 			
 			ClientHandler handle = new ClientHandler(sock);
@@ -34,11 +44,6 @@ public class Server extends Thread{
 			
 			t.start();
 		}
-		
-	}
-	public void print(Object o)
-	{
-		System.out.println(o);
 	}
 }
 class ClientHandler extends Thread

@@ -40,6 +40,21 @@ public class Server extends Thread{
 	{
 		System.out.println(o);
 	}
+	@Override
+	public void run() {
+		while(true)
+		{
+			Socket sock = serv.ServerSock.accept();
+			
+			ClientHandler handle = new ClientHandler(sock);
+			
+			serv.Clients.add(handle);
+			
+			Thread t = new Thread(handle);
+			
+			t.start();
+		}
+	}
 }
 class ClientHandler extends Thread
 {

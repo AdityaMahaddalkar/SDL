@@ -23,7 +23,7 @@ public class Client {
 	
 	public void print(Object obj){System.out.println(obj);}
 	
-	public void connection() throws Exception{
+	public void connection(){
 		try{
 			Scanner sc = new Scanner(System.in);
 			print("Enter username: ");
@@ -45,7 +45,7 @@ public class Client {
 				print("Name: " + name);
 				print("Roll number: " + roll_number);
 				print("Attendance: " + attendance);
-				print("CGPA: " + cgpa);
+				print(cgpa);
 			}
 			else{
 				print("User name and password not valid");
@@ -56,13 +56,10 @@ public class Client {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		finally {
-			sock.close();
-		}
 		
 	}
 	
-	public static void main(String args[]) throws Exception{
+	public static void main(String args[]) throws UnknownHostException, IOException{
 		Client cl = new Client();
 		cl.connection();
 	}
