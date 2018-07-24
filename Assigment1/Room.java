@@ -11,12 +11,12 @@ Class Room
 package Assigment1;
 public class Room
 {
-	protected float cost;
-	protected String roomNo;
-	protected String suite;
-	protected int floorNo;
-	protected boolean occupied;
-	protected String occupant;
+	float cost;
+	String roomNo;
+	String suite;
+	int floorNo;
+	boolean occupied;
+	String occupant;
 
 	public Room()
 	{
@@ -53,6 +53,9 @@ public class Room
 	}
 	boolean deleteOccupant(){
 		try{
+			if(this.occupied == false){
+				throw new Exception("Not occupied");
+			}
 			this.occupant = "NA";
 			this.occupied = false;
 		}

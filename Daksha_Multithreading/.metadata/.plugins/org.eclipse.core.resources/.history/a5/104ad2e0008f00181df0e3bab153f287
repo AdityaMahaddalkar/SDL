@@ -1,0 +1,15 @@
+package My_pkg;
+
+import java.sql.SQLException;
+
+public class Server {
+	Database db;
+	public static void main(String[] args) {
+		try {
+			= new Database();
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}

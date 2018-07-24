@@ -1,0 +1,12 @@
+package My_pkg;
+import java.sql.*;
+
+public class Database {
+	Connection conn;
+	Statement stmt;
+	String username = "jusername";
+	Database() throws ClassNotFoundException{
+		Class.forName("com.jdbc.mysql.DriverManager");
+		conn = DriverManager.getConnection();
+	}
+}
