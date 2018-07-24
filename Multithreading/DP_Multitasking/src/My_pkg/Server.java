@@ -1,28 +1,39 @@
 package My_pkg;
 
-import java.sql.SQLException;
 import java.net.*;
+import java.sql.SQLException;
 import java.io.*;
 import java.util.*;
-public class Server implements Runnable{
+public class Server extends Thread{
 	//static Database db;
-	ServerSocket ServerSock;
+	static ServerSocket ServerSock;
 	static ArrayList<ClientHandler> Clients;
-	
+	static ArrayList<Thread> ThreadList;
 	public Server(int port)
 	{
 		try {
 			ServerSock=new ServerSocket(port);
 			Clients=new ArrayList<ClientHandler>();
+			ThreadList = new ArrayList<Thread>();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Server serv=new Server(5051);
-		Thread th = new Thread(serv);
-		th.start();
+		
+		while(true) {
+			Socket sock = serv.ServerSock.accept();
+			
+			ClientHandler handle = new ClientHandler(sock);
+			
+			serv.Clients.add(handle);
+			
+			Thread t = new Thread(handle);
+			
+			t.start();
+		}
 		
 	}
 	public void print(Object o)
@@ -33,30 +44,23 @@ public class Server implements Runnable{
 	public void run() {
 		while(true)
 		{
-			try {
-				Socket serv=ServerSock.accept();
-				ClientHandler handle=new ClientHandler(serv);
-				Clients.add(handle);
-				Thread thread=new Thread(handle);
-				thread.start();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
 		}
 	}
 }
-class ClientHandler implements Runnable
+class ClientHandler extends Thread
 {
 	DataInputStream dis;
 	DataOutputStream dos;
 	Socket sock;
 	Database db;
-	public ClientHandler(Socket sock)
+	public ClientHandler(Socket sock) throws Exception, Exception
 	{
 		this.sock=sock;
 		try {
 			dis=new DataInputStream(sock.getInputStream());
 			dos=new DataOutputStream(sock.getOutputStream());
+			db = new Database();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -65,12 +69,13 @@ class ClientHandler implements Runnable
 	@Override
 	public void run() {
 			try {
-				String user_name=dis.readUTF();
-				String password=dis.readUTF();
-				//System.out.println("username="+name+"\tPassword="+password);
-				if(db.returnData(user_name, password))
+				String user_name=(String)dis.readUTF();
+				String password=(String)dis.readUTF();
+				boolean flag = db.returnData(user_name, password);
+				if(flag)
 				{
 					dos.writeBoolean(true);
+					print("Till Here");
 					dos.writeUTF(db.name);
 					dos.writeInt(db.roll_number);
 					dos.writeFloat(db.attendance);
@@ -85,6 +90,7 @@ class ClientHandler implements Runnable
 
 			} catch (IOException e) {
 				e.printStackTrace();
+				
 			}
 	}
 	public void print(Object o)
