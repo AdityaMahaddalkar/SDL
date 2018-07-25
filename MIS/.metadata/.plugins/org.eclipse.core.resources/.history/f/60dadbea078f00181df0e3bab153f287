@@ -1,0 +1,9 @@
+package My_pkg;
+
+import java.io.DataInputStream;
+
+public class Client {
+	Socket sock;
+	DataInputStream dis;
+	DataOutputStream dos;
+}

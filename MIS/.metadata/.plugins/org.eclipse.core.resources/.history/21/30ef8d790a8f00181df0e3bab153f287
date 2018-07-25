@@ -1,0 +1,48 @@
+package My_pkg;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
+
+public class Client {
+	Socket sock;
+	DataInputStream dis;
+	DataOutputStream dos;
+	String name, user_name, password;
+	int roll_number;
+	float attendance, cgpa;
+	
+	public Client() throws UnknownHostException, IOException{
+		sock = new Socket("127.0.0.1", 5050);
+		dis = new DataInputStream(sock.getInputStream());
+		dos = new DataOutputStream(sock.getOutputStream());
+	}
+	
+	public void print(Object obj){System.out.println(obj);}
+	
+	public void connection(){
+		try{
+			Scanner sc = new Scanner(System.in);
+			print("Enter username: ");
+			user_name = sc.next();
+			print("Enter password: ");
+			password = sc.next();
+			dos.writeUTF(user_name);
+			dos.writeUTF(password);
+			
+			// take data from server
+			
+			name = dis.readUTF();
+			roll_number = dis.readInt();
+			attendance = dis.readFloat();
+			cgpa = dis.readFloat();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+}
