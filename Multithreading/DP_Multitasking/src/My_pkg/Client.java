@@ -11,9 +11,9 @@ public class Client {
 	Socket sock;
 	DataInputStream dis;
 	DataOutputStream dos;
-	String name, user_name, password;
-	int roll_number;
-	float attendance, cgpa;
+	public String name, user_name, password;
+	public int roll_number;
+	public float attendance, cgpa;
 	
 	public Client() throws UnknownHostException, IOException{
 		sock = new Socket("127.0.0.1", 5051);
@@ -23,17 +23,15 @@ public class Client {
 	
 	public void print(Object obj){System.out.println(obj);}
 	
-	public void connection() throws Exception{
+	public boolean connection(String username, String password) throws Exception{
 		try{
-			Scanner sc = new Scanner(System.in);
+			/*Scanner sc = new Scanner(System.in);
 			print("Enter username: ");
 			user_name = sc.next();
 			print("Enter password: ");
-			password = sc.next();
-			dos.writeUTF(user_name);
+			password = sc.next();+*/
+			dos.writeUTF(username);
 			dos.writeUTF(password);
-			
-			// take data from server
 			
 			boolean flag = dis.readBoolean();
 			if(flag){
@@ -41,11 +39,13 @@ public class Client {
 				roll_number = dis.readInt();
 				attendance = dis.readFloat();
 				cgpa = dis.readFloat();
-				
+				/*
 				print("Name: " + name);
 				print("Roll number: " + roll_number);
 				print("Attendance: " + attendance);
 				print("CGPA: " + cgpa);
+				*/
+				return true;
 			}
 			else{
 				print("User name and password not valid");
@@ -59,11 +59,13 @@ public class Client {
 		finally {
 			sock.close();
 		}
+		return false;
 		
 	}
 	
 	public static void main(String args[]) throws Exception{
 		Client cl = new Client();
-		cl.connection();
+		cl.connection("naren", "khake");
 	}
+	
 }
